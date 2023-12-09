@@ -1,0 +1,91 @@
+﻿@model QuanLyKhachSan.Models.NguoiDung
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<header class="header__section">
+    <div class="top__nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="tn-left">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="SĐT").MoTa
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Email").MoTa
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="tn-right">
+                        <div class="social" style="margin:10px">
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Facebook").MoTa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Instagram").MoTa"><i class="fab fa-instagram"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link YouTube").MoTa"><i class="fab fa-youtube"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Linkedin").MoTa"><i class="fab fa-linkedin"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Twitter").MoTa"><i class="fab fa-twitter"></i></a>
+                        </div>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="home.html">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 left">
+                    <div class="menu">
+                        <div class="menu_left">
+                            <ul>
+                                <li><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
+                                <li><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
+                                <li><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
+                                <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="~/front-end/css/login.css">
+</header>
+<div class="login" style="background-image: url(/images/login.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="login-form col-lg-4 offset-lg-4">
+                <h2>Nhập OTP</h2>
+                @if (TempData["error"] != null)
+                {
+                    <div style="color: red;">@TempData["error"]</div>
+                }
+                <p>Vui lòng nhập mã xác nhận vừa được gửi đến Email:</p>
+                <form asp-area="Admin" asp-controller="TaiKhoan" asp-action="QuenMatKhau2" method="post">
+                    <div class="email-group group">
+                        <label for="email-input">Nhập OTP của bạn:</label>
+                        <input type="text" name="IdNguoiDung" value="@Model.IdNguoiDung" aria-describedby="text" hidden>
+                        <input type="text" class="form-control" id='email-input' placeholder="Mã OTP" name="MaXacThuc">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <button type="submit" class="btn">Tiếp tục</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

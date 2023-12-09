@@ -1,0 +1,4 @@
+﻿@if (Context.Request.Cookies.ContainsKey("UserName"))
+{
+	<li><a href="@Url.Action("LichSuDatPhong", "HoaDon", new { Areas=""})">Lịch sử đặt phòng</a></li>
+}

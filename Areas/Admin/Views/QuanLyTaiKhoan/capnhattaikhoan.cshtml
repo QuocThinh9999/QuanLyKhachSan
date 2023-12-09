@@ -1,0 +1,87 @@
+﻿@model QuanLyKhachSan.Areas.Admin.Models.TaiKhoanNguoiDung.TaiKhoanNguoiDung
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "cap nhat tai khoan";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form action="
+                            " style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;">
+                                <button type="button" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;">Quản lý tài khoản/p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <form asp-area="Admin" asp-controller="QuanLyTaiKhoan" asp-action="CapNhatTaiKhoan" method="post" enctype="multipart/form-data">
+                            <div class="col-lg-10">
+                                <div class="image-title" style="margin-bottom: 50px;">
+                                    <h2>Thông tài khoản </h2>
+                                    <h6>Cập nhật thông tin tài khoản: </h6>
+                                </div>
+                                <div class="image-infor">
+                                    <div class="input-group mb-3">
+
+                                        <input type="text" name="id" value="@Model.Id" aria-describedby="text" hidden>
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên</span>
+                                        <input  type="text" class="form-control" value="@Model.Name" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Email</span>
+                                        <input  type="text" class="form-control"  aria-describedby="basic-addon1" value="@Model.Email" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Trạng thái</span>
+                                        @if(Model.TrangThai==0)
+                                        {
+                                            <input type="text" class="form-control" aria-describedby="basic-addon1" value="Chưa kích hoạt" readonly>
+                                        }
+                                        else
+                                        {
+                                            <select name="trangthai" type="text" class="form-control" aria-describedby="basic-addon1">
+                                                
+                                                <option value="1" selected="@(Model.TrangThai == 1)">Đã kích hoạt</option>
+                                                <option value="2" selected="@(Model.TrangThai == 2)">Đã bị chặn</option>
+                                            </select>
+                                        }
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="button-group">
+                                    <button class="setting-btn">Lưu</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

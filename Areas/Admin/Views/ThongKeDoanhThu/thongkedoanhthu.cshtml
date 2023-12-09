@@ -1,0 +1,191 @@
+﻿@model QuanLyKhachSan.Areas.Admin.Models.ThongKe.ThongKe
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form action="
+                            " style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;">
+                                <button type="button" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;"> Thống kê doanh thu</p>
+            </div>
+            <div class="image">
+                <div class="row">
+                    <div class="col-lg-5">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12" style="margin-bottom:20px;">
+                                    <select class="form-select" aria-label="Default select example ">
+                                        <option selected>Chọn tháng thống kê</option>
+                                        <option value="1">Tháng 1</option>
+                                        <option value="2">Tháng 2</option>
+                                        <option value="3">Tháng 3</option>
+                                        <option value="1">Tháng 4</option>
+                                        <option value="2">Tháng 5</option>
+                                        <option value="3">Tháng 6</option>
+                                        <option value="1">Tháng 7</option>
+                                        <option value="2">Tháng 8</option>
+                                        <option value="3">Tháng 9</option>
+                                        <option value="1">Tháng 10</option>
+                                        <option value="2">Tháng 11</option>
+                                        <option value="3">Tháng 12</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4" style="margin-bottom:20px;">
+                                    <button class="total-btn">Xem doanh thu</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <canvas id="myChart1" style="height: 800px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <form action="">
+                            <div class="row">
+                                <div class=" col-md-12 col-lg-7 " style="margin-bottom:20px;">
+                                    <select class="form-select" aria-label="Default select example ">
+                                        <option selected>Chọn tháng thống kê</option>
+                                        <option value="1">Tháng 1</option>
+                                        <option value="2">Tháng 2</option>
+                                        <option value="3">Tháng 3</option>
+                                        <option value="1">Tháng 4</option>
+                                        <option value="2">Tháng 5</option> 
+                                        <option value="3">Tháng 6</option>
+                                        <option value="1">Tháng 7</option>
+                                        <option value="2">Tháng 8</option>
+                                        <option value="3">Tháng 9</option>
+                                        <option value="1">Tháng 10</option>
+                                        <option value="2">Tháng 11</option>
+                                        <option value="3">Tháng 12</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-lg-4" style="margin-bottom:20px;">
+                                    <button class="total-btn">Xem doanh thu</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div style="margin-bottom: 100px;">
+                            <canvas id="myChart2" style="height: 400px;"></canvas>
+                        </div>
+                        <div>
+                            <canvas id="myChart3" style="height: 400px;"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+@* <script>
+  
+    const chart1 = document.getElementById('myChart1');
+    const chart2 = document.getElementById('myChart2');
+    const chart3 = document.getElementById('myChart3');
+    new Chart(chart1, {
+        type: 'bar',
+        data: {
+            labels: ['Tháng @Model.thang[0]', 'Tháng @Model.thang[1]', 'Tháng @Model.thang[2]', 'Tháng @Model.thang[3]', 'Tháng @Model.thang[4]', 'Tháng @Model.thang[5]'],
+            datasets: [{
+                label: 'Doanh thu',
+                data: [@Model.tong[0], @Model.tong[1], @Model.tong[2], @Model.tong[3], @Model.tong[4], @Model.tong[5]],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    const DATA_COUNT = 5;
+    const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+
+    const data = {
+        labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: [418, 263, 434, 586, 332],
+                backgroundColor: ["#e63946", "#254BDD", "#ffbe0b", "#1d3557", "#326998"]
+            }
+        ]
+    };
+    new Chart(chart2, {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Pie Chart'
+                }
+            }
+        },
+    });
+    new Chart(chart3, {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Pie Chart'
+                }
+            }
+        },
+    });
+</script>
+<script src="../../js/dashboard.js"></script>
+<script src="../../js/test.js"></script>
+</body>
+
+</html> *@

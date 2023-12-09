@@ -1,0 +1,121 @@
+﻿@model IEnumerable<QuanLyKhachSan.Models.ViewHoaDon.lichsuhoadon>
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="header__section">
+    <div class="top__nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="tn-left">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="SĐT").MoTa
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Email").MoTa
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="tn-right">
+                        <div class="social" style="margin:10px">
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Facebook").MoTa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Instagram").MoTa"><i class="fab fa-instagram"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link YouTube").MoTa"><i class="fab fa-youtube"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Linkedin").MoTa"><i class="fab fa-linkedin"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Twitter").MoTa"><i class="fab fa-twitter"></i></a>
+                        </div>
+
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="home.html">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 left">
+                    <div class="menu">
+                        <div class="menu_left">
+                            <ul>
+                                <li><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
+                                <li><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
+                                <li><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
+                                <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/front-end/js/main.js"></script>
+    <link rel="stylesheet" href="~/front-end/css/style.css">
+</header>
+<div class="room_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="room_title">
+                    <h2>Lịch sử đặt phòng</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="row">
+                    @foreach(var item in Model)
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="room_item">
+                                <img src="@item.url" alt="">
+                                <div class="room_details">
+                                    <h3>@item.tenphong</h3>
+                                    <h2>@item.tongtien.ToString("N0") vnđ</h2>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="r-o">Checkin:</td>
+                                                <td>@item.GioCheckin.ToString("dd/MM/yyyy")</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Check-out</td>
+                                                <td>@item.GioCheckout.ToString("dd/MM/yyyy")</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Trạng thái:</td>
+                                                <td>@item.trangthai</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="@Url.Action("LichSuChiTiet", "HoaDon", new { id=item.id })" class="primary-btn">Chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                   
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

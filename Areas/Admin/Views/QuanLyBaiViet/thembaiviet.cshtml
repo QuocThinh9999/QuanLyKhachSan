@@ -1,0 +1,73 @@
+﻿@model QuanLyKhachSan.Areas.Admin.Models.ThemDuLieu.ThemBlog
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Thembaiviet";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form action="
+                            " style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;">
+                                <button type="button" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;">Quản lý bài viết</p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <form asp-area="Admin" asp-controller="QuanLyBaiViet" asp-action="ThemBaiViet" method="post" enctype="multipart/form-data">
+                            <div class="col-lg-10">
+                                <div class="image-title" style="margin-bottom: 50px;">
+                                    <h2>Thêm mới bài viết</h2>
+                                    <h6>Cập nhật thông tin bài viết: </h6>
+                                </div>
+                                <div class="image-infor">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tiêu đề</span>
+                                        <input name="TieuDe" type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Mô tả</span>
+                                        <textarea name="MoTa" class="form-control" style="height: 150px; resize: vertical;" placeholder="Mô tả" aria-describedby="basic-addon1"></textarea>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Chọn ảnh</span>
+                                        <input name="Images" type="file" class="form-control" aria-describedby="basic-addon1" multiple>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="button-group">
+                                    <button class="setting-btn" type="submit">Thêm mới</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

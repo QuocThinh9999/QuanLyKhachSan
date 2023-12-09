@@ -1,0 +1,145 @@
+﻿@model IEnumerable<QuanLyKhachSan.Areas.Admin.Models.HoaDonAdmin.HoaDonAdmin>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Danh sach tai khoan";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form asp-area="Admin" asp-controller="QuanLyHoaDon" asp-action="DanhSachHoaDon" method="post" enctype="multipart/form-data" style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;" name="ten">
+                                <button type="submit" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;"> Quản lý hóa đơn</p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="image-title">
+                                <h2>Danh sách hóa đơn</h2>
+                                @if (Model.FirstOrDefault().thongbao == 0)
+                                {
+                                    <h6>Thông tin hóa đơn: </h6>
+                                }
+                                else
+                                {
+                                    <h6>Bạn có <span class="text-danger">@Model.FirstOrDefault().thongbao</span> hóa đơn mới!</h6>
+                                }
+                            </div>
+                            @if (Model.Any())
+                            {
+                                int i = 0;
+                                <table class="table" style="align-items: center;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên</th>
+                                            <th scope="col">Check in</th>
+                                            <th scope="col">Check out</th>
+                                            <th scope="col">Tổng tiền</th>
+
+                                            <th scope="col">Trạng thái</th>
+
+                                            <th scope="col" style="padding-left: 20px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            i++;
+                                           @*  @if (i <= item.thongbao)
+                                            {
+                                                <tr style="outline: 2px solid black; font-weight: bold;">
+
+                                                    <th scope="row"><strong>@i</strong></th>
+                                                    <td><strong>@item.TenNguoiDung</strong></td>
+                                                    <td><strong>@item.GioCheckin.ToString("dd/MM/yyyy")</strong></td>
+                                                    <td><strong>@item.GioCheckout.ToString("dd/MM/yyyy")</strong></td>
+                                                    <td><strong>@item.TongTien.ToString("N0")</strong></td>
+                                                        @if (item.TrangThai == "Chờ nhận phòng")
+                                                        {
+                                                        <td style="color:orange;"><strong>@item.TrangThai</strong></td>
+                                                        }
+                                                        @if (item.TrangThai == "Đã hủy")
+                                                        {
+                                                        <td style="color:red;"><strong>@item.TrangThai</strong></td>
+                                                        }
+                                                        @if (item.TrangThai == "Thành công")
+                                                        {
+                                                        <td style="color:green;"><strong>@item.TrangThai</strong></td>
+                                                        }
+                                                    <td>
+                                                        <a href="@Url.Action("CapNhatHoaDon", "QuanLyHoaDon", new { Areas="Admin", id = item.IdHoaDon })" style="color: #000;">
+                                                            <strong><i class="fa fa-pencil-alt " id="first-icon"></i></strong>
+                                                        </a>
+                                                    </td>
+                                                </tr> *@
+                                                
+                                           @*  }
+                                            else
+                                            { *@
+                                                <tr>
+                                                    <th scope="row">@i</th>
+                                                    <td>@item.TenNguoiDung</td>
+                                                    <td>@item.GioCheckin.ToString("dd/MM/yyyy")</td>
+                                                    <td>@item.GioCheckout.ToString("dd/MM/yyyy")</td>
+                                                    <td>@item.TongTien.ToString("N0")</td>
+                                                    @if (item.TrangThai == "Chờ nhận phòng")
+                                                    {
+                                                        <td style="color:orange;">@item.TrangThai</td>
+                                                    }
+                                                    @if (item.TrangThai == "Đã hủy")
+                                                    {
+                                                        <td style="color:red;">@item.TrangThai</td>
+                                                    }
+                                                    @if (item.TrangThai == "Thành công")
+                                                    {
+                                                        <td style="color:green;">@item.TrangThai</td>
+                                                    }
+                                                    <td>
+                                                        <a href="@Url.Action("CapNhatHoaDon", "QuanLyHoaDon", new { Areas="Admin", id = item.IdHoaDon })" style="color: #000;">
+                                                            <i class="fa fa-pencil-alt " id="first-icon"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            
+                                            
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <img src="~/images/no-result-icon.jpg" style="height:450px; width:450px">
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

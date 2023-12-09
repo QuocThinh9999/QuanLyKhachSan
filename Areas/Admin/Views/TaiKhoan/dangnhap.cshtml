@@ -1,0 +1,101 @@
+﻿@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<header class="header__section">
+    <div class="top__nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="tn-left">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="SĐT").MoTa
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Email").MoTa
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="tn-right">
+                        <div class="social" style="margin:10px">
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Facebook").MoTa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Instagram").MoTa"><i class="fab fa-instagram"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link YouTube").MoTa"><i class="fab fa-youtube"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Linkedin").MoTa"><i class="fab fa-linkedin"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Twitter").MoTa"><i class="fab fa-twitter"></i></a>
+                        </div>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="home.html">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 left">
+                    <div class="menu">
+                        <div class="menu_left">
+                            <ul>
+                                <li><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
+                                <li><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
+                                <li><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
+                                <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="~/front-end/css/login.css">
+</header>
+<div class="login" style="background-image: url(/images/login.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="login-form col-lg-4 offset-lg-4">
+                <h2>Đăng nhập</h2>
+                <form class="form" asp-area="Admin" asp-controller="TaiKhoan" asp-action="DangNhap" method="post">
+                    @if (TempData["error"] != null)
+                    {
+                        <div style="color: red;">@TempData["error"]</div>
+                    }
+
+                    <div class="email-group group">
+                        <label for="email-input">Email</label>
+                        <input type="email" class="form-control" id='email-input' placeholder="Email" name="Email">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <div class="password-group group">
+                        <label for="password-input">Mật khẩu</label>
+                        <input type="password" class="form-control" id='password-input' placeholder="Mật khẩu" name="Password">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <div class="forgot-btn">
+                        <button><a href="@Url.Action("QuenMatKhau", "TaiKhoan", new { Areas="Admin"})" style="text-decoration: none;color: black;">Quên mật khẩu?</a></button>
+                    </div>
+                    <button type="submit" class="btn">Đăng nhập</button>
+                </form>
+                <div class="sign-up">
+                    <h6>Bạn chưa có tài khoản</h6>
+                    <a href="@Url.Action("DangKy", "TaiKhoan", new { Areas="Admin"})">ĐĂNG KÝ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

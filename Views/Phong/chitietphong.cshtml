@@ -1,0 +1,250 @@
+﻿@model QuanLyKhachSan.Models.TrangPhong.ChiTietTrangPhong
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "";
+    
+}
+<header class="header__section">
+    <div class="top__nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="tn-left">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="SĐT").MoTa
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Email").MoTa
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="tn-right">
+                        <div class="social" style="margin:10px">
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Facebook").MoTa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Instagram").MoTa"><i class="fab fa-instagram"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link YouTube").MoTa"><i class="fab fa-youtube"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Linkedin").MoTa"><i class="fab fa-linkedin"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Twitter").MoTa"><i class="fab fa-twitter"></i></a>
+                        </div>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="home.html">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 left">
+                    <div class="menu">
+                        <div class="menu_left">
+                            <ul>
+                                <li><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
+                                <li class="active"><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
+                                <li><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
+                                <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
+                             
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="~/front-end/js/main.js"></script>
+    <link rel="stylesheet" href="~/front-end/css/style.css">
+</header>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="mb-4">@Model.TenPhong</h2>
+                        <div id="carouselExampleIndicators" class="carousel carousel-room-detail slide">
+                            <div class="carousel-indicators">
+                                @for(int i = 0; i < Model.UrlImages.Count; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <button class="active"
+                                                type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active">
+                                            <img src="@Model.UrlImages[0]" alt="">
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                data-bs-slide-to="@i">
+
+                                            <img src="@Model.UrlImages[i]"  alt="">
+                                        </button>
+                                    }
+                                   
+                                }
+                               
+                            </div>
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < Model.UrlImages.Count; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <div class="carousel-item carousel-item-detail active">
+
+                                            <img src="@Model.UrlImages[0]"  class="d-block w-100" alt="...">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item carousel-item-detail">
+
+                                            <img src="@Model.UrlImages[i]" class="d-block w-100" alt="...">
+                                        </div>
+                                    }
+
+                                }
+                                
+                                
+                                
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 room-single mt-4 mb-5">
+                        @if (@Model.GiaSauGiam == @Model.GiaPhong)
+                        {
+                            <h2><span>Giá 1 ngày:</span> @Model.GiaPhong.ToString("N0") vnđ</h2>
+                        }
+                        else
+                        {
+                            
+                        <h2><span>Giá 1 ngày:</span> @Model.GiaSauGiam.ToString("N0") <del> @Model.GiaPhong.ToString("N0") vnđ </del></h2>
+                        }
+                        
+                        <div class="d-md-flex mt-5 mb-5">
+                            <ul class="list">
+                                
+                               
+                            </ul>
+                            <ul class="list">
+                                <li><span>Số người lớn:</span>@Model.SoNguoiLon</li>
+                                <li><span>Số trẻ em:</span>@Model.SoTreEm</li>
+                                <li><span>Diện tích:</span>@Model.DienTich m²</li>
+                            </ul>
+                            <ul class="list ml-md-5">
+                                
+                                
+                            </ul>
+                        </div>
+                        <p>
+                            @Model.MoTa
+                        </p>
+                    </div>
+                    <div class="col-md-12 room-single mb-5 mt-5">
+                        <h4 class="mb-4">Một số phòng khác</h4>
+                        <div class="row">
+                            @for(int i=0;i<2;i++)
+                            {
+                                <div class="col-sm col-md-6">
+                                <div class="room">
+                                    <a href="rooms.html"
+                                       class="img img-2 d-flex justify-content-center align-items-center"
+                                           style="background-image: url(@Model.phongKhaDungs[i].Url);">
+                                        <img src="@Model.phongKhaDungs[i].Url" alt="" 
+                                             class="img img-2 d-flex justify-content-center align-items-center">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3 text-center">
+                                        <h3 class="mb-3"><a href="rooms.html">@Model.phongKhaDungs[i].TenPhong</a></h3>
+                                        <p>
+                                                @if (Model.phongKhaDungs[i].GiaSauGiam != Model.phongKhaDungs[i].GiaPhong)
+                                                {
+                                                    <span class="price mr-2">@Model.phongKhaDungs[i].GiaSauGiam.ToString("N0") <del>@Model.phongKhaDungs[i].GiaPhong.ToString("N0")</del></span> <span class="per"> một ngày</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="price mr-2">@Model.phongKhaDungs[i].GiaPhong.ToString("N0")</span> <span class="per"> một ngày</span>
+                                                }
+                                            </p>
+                                        <hr>
+                                        <p class="pt-1">
+                                            <a href="@Url.Action("ChiTietPhong", "Phong", new { Areas="", id=Model.phongKhaDungs[i].id} )" class="btn-custom">
+                                                Chi tiết hơn <span class="icon-long-arrow-right"></span>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                            
+                            
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- .col-md-8 -->
+            <div class="col-lg-4 sidebar">
+                <div class="sidebar-box">
+                    <div class="booking_form-room-detail">
+                        <h2>
+                            Booking Your Hotel
+                        </h2>
+                        <form asp-area="" asp-controller="HoaDon" asp-action="MauHoaDon" method="post" enctype="multipart/form-data">
+                            <div class="check-date">
+                                <p>Check In:</p>
+                                <div class="check">
+                                    <input   name="IdPhong" value="@Model.id" hidden>
+                                    <input type="text" class="date-input " id="hasDatepicker1" name="GioCheckin">
+                                    <div class="icon-room-detail"><i class="fa-solid fa-calendar-week"></i></div>
+
+                                </div>
+                            </div>
+                            <div class="check-date">
+                                <p>Check Out:</p>
+                                <div class="check">
+                                    <input type="text" class="date-input " id="hasDatepicker2" name="GioCheckout">
+                                    <div class="icon-room-detail"><i class="fa-solid fa-calendar-week"></i></div>
+                                </div>
+                                @if (TempData["error"] != null)
+                                {
+                                    <span class="noti-text" id="validation-notes">
+                                       @TempData["error"]
+                                    </span>
+                                }
+                                
+                            </div>
+                            <button class="check-available" type="submit" id="checkdate-btn">Đặt ngay</button>
+                        </form>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</section>

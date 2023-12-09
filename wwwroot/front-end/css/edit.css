@@ -1,0 +1,92 @@
+
+.notification{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.15s;
+    
+}
+.notification .note-group{
+    padding: 50px;
+    text-align: center;
+    background: #fff;
+    width:400px ;
+    height:200px ;
+    border-radius: 5px;
+}
+.notification .note-group p{
+    font-size: 16px !important;
+    color: #252733 !important;
+    margin-bottom: 20px;
+}
+.notification .note-group .setting-btn {
+    text-align: center;
+    font-size: 15px;
+    height: 50px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    width: 139px;
+    text-align: center;
+    border-radius: 5px;
+    color: #ffffff;
+    background: #252733;
+    transition: all 0.3s;
+}
+.notification .note-group .setting-btn:hover{
+    border: none;
+    background-color: #dfa974;;
+}
+    /* BLOG */
+.information{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.15s;
+
+}
+.information .text{
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    width:600px ;
+    height:200px ;
+    border-radius: 5px;
+}
+.information  button{
+    font-size: 16px;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    text-align: center;
+    color: #ffffff;
+    background:#252733;
+    transition: all 0.3s;
+    position: absolute;
+    top:20px;
+    right: 15px;
+    border: none;
+}
+.information  button:hover{
+    background-color: #dfa974;
+}
+.show {
+    visibility: visible;
+    opacity: 1;
+  }

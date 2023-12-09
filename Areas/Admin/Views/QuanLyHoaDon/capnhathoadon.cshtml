@@ -1,0 +1,111 @@
+﻿@model QuanLyKhachSan.Areas.Admin.Models.HoaDonAdmin.HoaDonAdmin
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Thembaiviet";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form asp-area="Admin" asp-controller="QuanLyHoaDon" asp-action="DanhSachHoaDon" method="post" enctype="multipart/form-data" style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;">
+                                <button type="button" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;">Quản lý hóa đơn</p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <form asp-area="Admin" asp-controller="QuanLyHoaDon" asp-action="CapNhatHoaDon" method="post" enctype="multipart/form-data">
+                            <div class="col-lg-10">
+                                <div class="image-title" style="margin-bottom: 50px;">
+                                    <h2>Cập nhật hóa đơn</h2>
+                                    <h6>Cập nhật thông tin hóa đơn: </h6>
+                                </div>
+                                <div class="image-infor">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.IdHoaDon" name="IdHoaDon" hidden>
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Trạng thái</span>
+                                        @if(Model.TrangThai=="Chờ nhận phòng")
+                                        {
+                                            <select name="trangthai" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1">
+                                                <option value="Chờ nhận phòng" style="color:orange;" selected="@(Model.TrangThai=="Chờ nhận phòng")">Chờ nhận phòng</option>
+                                                <option value="Thành công" style="color:green;" selected="@(Model.TrangThai=="Thành công")">Thành công</option>
+                                                <option value="Đã hủy" style="color:red;" selected="@(Model.TrangThai=="Đã hủy")">Đã hủy</option>
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            if(Model.TrangThai=="Thành công")
+                                            {
+                                                <input type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.TrangThai" readonly style="color:green;">
+                                                
+                                            }
+                                            if (Model.TrangThai == "Đã hủy")
+                                            {
+                                                <input type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.TrangThai" readonly style="color:red;">
+
+                                            }
+                                        }
+
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên</span>
+                                        <input  type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.TenNguoiDung" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Email</span>
+                                        <input  type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.email" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giờ check in</span>
+                                        <input type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.GioCheckin.ToString("dd/MM/yyyy")" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giờ check out</span>
+                                        <input type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.GioCheckout.ToString("dd/MM/yyyy")" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tổng tiền</span>
+                                        <input type="text" class="form-control" placeholder="Tên bài viết" aria-describedby="basic-addon1" value="@Model.TongTien.ToString("N0")" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Yêu cầu</span>
+                                        <textarea  class="form-control" style="height: 150px; resize: vertical;" placeholder="Trống" aria-describedby="basic-addon1" readonly>@Model.yeucau</textarea>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="button-group">
+                                    <button class="setting-btn" type="submit">Cập nhật</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

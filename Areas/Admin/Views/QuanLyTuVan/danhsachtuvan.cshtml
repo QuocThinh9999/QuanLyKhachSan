@@ -1,0 +1,147 @@
+﻿@model IEnumerable<QuanLyKhachSan.Areas.Admin.Models.ThongBao.ViewThongBao>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Danh sach tu van";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form asp-area="Admin" asp-controller="QuanLyTuVan" asp-action="DanhSachTuVan" method="post" enctype="multipart/form-data" style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;" name="ten">
+                                <button type="submit" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;"> Quản lý tư vấn</p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="image-title">
+                                <h2>Danh sách tư vấn</h2>
+                                @if (Model.FirstOrDefault().SoThongBao == 0)
+                                                    {
+                                    <h6>Thông tin tư vấn: </h6>
+                                }
+                                else
+                                {
+                                    <h6>Bạn có <span class="text-danger">@Model.FirstOrDefault().SoThongBao</span> thông báo mới!</h6>
+                                }
+                            </div>
+                            @if (Model.Any())
+                            {
+                                int i = 0;
+                                <table class="table" style="align-items: center;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Ngày giờ nhận</th>
+                                            <th scope="col">Lời nhắn</th>
+                                            <th scope="col" style="padding-left: 20px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            i++;
+                                            @if (i <= item.SoThongBao)
+                                            {
+                                                <tr style="outline: 2px solid black; font-weight: bold;">
+                                                    <th scope="row"><strong>@i</strong></th>
+                                                    <td><strong>@item.Ten</strong></td>
+                                                    <td><strong>@item.Email</strong></td>
+                                                    <td><strong>@item.NgayGioNhan</strong></td>
+                                                    <td>
+                                                        <div class="group-text">
+                                                            <strong><i class="fa fa-info"></i></strong>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <i class="fa fa-trash-alt" id="trash-icon"></i>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <th scope="row">@i</th>
+                                                    <td>@item.Ten</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.NgayGioNhan</td>
+                                                    <td>
+                                                        <div class="group-text">
+                                                            <i class="fa fa-info"></i>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <i class="fa fa-trash-alt" id="trash-icon"></i>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                            <div class="information" id="infor-part">
+                                                <button class="close-btn"><i class="fa fa-times"></i></button>
+                                                <div class="text">
+                                                    <p style="color: #252733;
+                                                font-size: 16px;">
+                                                        @item.LoiNhan
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="notification" id="notes">
+                                                <div class="note-group">
+                                                    <p>Bạn xác nhận xóa?</p>
+                                                    <div class="note-btn">
+                                                        <a href="@Url.Action("XoaTuVan", "QuanLyTuVan", new { Areas="Admin", id = item.IdTuVan })">
+                                                            <button class="setting-btn">Xác nhận </button>
+
+                                                        </a>
+                                                            <button class="setting-btn cancel-btn" id="cancel-btn">Hủy</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <img src="~/images/no-result-icon.jpg" style="height:450px; width:450px">
+                            }
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿
+	@if (Context.Request.Cookies.ContainsKey("UserName"))
+	{
+	if (Context.Request.Cookies["Id"] == "d07ce7c7-666a-4a98-a2ff-85dcca77479c")
+	{
+		@* <a class="bk-btn" asp-area="Admin" asp-controller="QuanLyThongTinWeb" asp-action="DanhSachThongTinWeb">@Context.Request.Cookies["UserName"]!</a>
+		<a class="bk-btn" asp-area="Admin" asp-controller="TaiKhoan" asp-action="DangXuat">Đăng xuất</a> *@
+		<div class="tn_item" style="position: relative;">
+			<a asp-area="Admin" asp-controller="QuanLyThongTinWeb" asp-action="DanhSachThongTinWeb" class="bk-btn">@Context.Request.Cookies["UserName"]</a>
+			
+		</div>
+	}
+	else
+	{
+		@* <a class="bk-btn" asp-area="" asp-controller="QuanLyThongTinCaNhan" asp-action="CapNhatThongTinCaNhan">@Context.Request.Cookies["UserName"]!</a>
+		<a class="bk-btn" asp-area="Admin" asp-controller="TaiKhoan" asp-action="DangXuat">Đăng xuất</a> *@
+		<div class="tn_item" style="position: relative;">
+			<a asp-area="" asp-controller="QuanLyThongTinCaNhan" asp-action="CapNhatThongTinCaNhan" class="bk-btn">@Context.Request.Cookies["UserName"]</a>
+			<div class="dropdown_part" style="width:200px">
+				<ul>
+					<li><a class="dropdown_item" href="@Url.Action("CapNhatThongTinCaNhan", "QuanLyThongTinCaNhan", new { Areas=""})">Thông tin cá nhân</a></li>
+					<li><a class="dropdown_item" href="@Url.Action("LichSuDatPhong", "HoaDon", new { Areas=""})">Lịch sử đặt phòng</a></li>
+					<li><a class="dropdown_item" asp-area="Admin" asp-controller="TaiKhoan" asp-action="DangXuat">Đăng xuất</a></li>
+				</ul>
+			</div>
+		</div>
+	}
+	
+	}
+	else
+	{
+		
+		<a asp-route="NameDangNhap" class="bk-btn">Đăng nhập</a>
+	}

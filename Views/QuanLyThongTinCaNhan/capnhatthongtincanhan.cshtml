@@ -1,0 +1,158 @@
+﻿@model QuanLyKhachSan.Models.NguoiDung
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="header__section">
+    <div class="top__nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="tn-left">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="SĐT").MoTa
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Email").MoTa
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="tn-right">
+                        <div class="social" style="margin:10px">
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Facebook").MoTa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Instagram").MoTa"><i class="fab fa-instagram"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link YouTube").MoTa"><i class="fab fa-youtube"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Linkedin").MoTa"><i class="fab fa-linkedin"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Twitter").MoTa"><i class="fab fa-twitter"></i></a>
+                        </div>
+
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="home.html">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 left">
+                    <div class="menu">
+                        <div class="menu_left">
+                            <ul>
+                                <li><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
+                                <li><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
+                                <li><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
+                                <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="personal_info">
+    <div class="container">
+        <div class="row" style="margin-bottom:50px ;">
+            <div class="col-lg-8 offset-lg-3">
+                <div class="header-left">
+                    <h2 style="margin-bottom: 20px; margin-top: 50px;font-weight: 700;">Thông tin cá nhân</h2>
+                    <span>Cập nhật thông tin của bạn !</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-3">
+                <form asp-area="" asp-controller="QuanLyThongTinCaNhan" asp-action="CapNhatThongTinCaNhan" method="post" enctype="multipart/form-data">
+                    <table class="table" style="align-items: center;">
+                        <tbody>
+                            <tr style="border-top: 1px solid  #e5e5e5;">
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td style="padding-left:20px;color: #212529;;">
+                                        @Model.Email
+                                    <br>
+                                    <span>
+                                        Đây là địa chỉ email bạn dùng để đăng nhập. Chúng tôi sẽ gửi các xác nhận
+                                        tới địa chỉ này.
+                                    </span>
+                                </td>
+                            </tr>
+                                <th scope="row">Tên</th>
+                                @if (TempData["error"] != null)
+                                {
+                                     <div style="color: red;">@TempData["error"]</div>
+                                }
+
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Trống" aria-label="Username" aria-describedby="basic-addon1" style="border: none;" value="@Model.Ten" name="ten">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số điện thoại</th>
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Trống" aria-label="Username" aria-describedby="basic-addon1" style="border: none;" value="@Model.SoDienThoai" name="sdt">
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row">Giới tính</th>
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Trống" aria-label="Username" aria-describedby="basic-addon1" style="border: none;" value="@Model.GioiTinh" name="gioitinh">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ngày Sinh</th>
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Trống" aria-label="Username" aria-describedby="basic-addon1" style="border: none;" value="@Model.NgaySinh" name="ngaysinh">
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <button class=" bk-btn ">Lưu chỉnh sửa</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .bk-btn {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 16px 28px 15px;
+        margin-right: 30px;
+        background: #dfa974;
+        color: #ffffff;
+        white-space: nowrap;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 2px;
+    }
+</style>

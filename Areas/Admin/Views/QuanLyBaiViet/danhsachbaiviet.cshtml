@@ -1,0 +1,125 @@
+﻿@model IEnumerable<QuanLyKhachSan.Models.Blog>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Danh sach bai viet";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form asp-area="Admin" asp-controller="QuanLyBaiViet" asp-action="DanhSachBaiViet" method="post" enctype="multipart/form-data" style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;" name="ten">
+                                <button type="submit" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;"> Quản lý bài viết</p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="image-title">
+                                <h2>Danh sách bài viết</h2>
+                                <h6>Cập nhật thông tin bài viết: </h6>
+                            </div>
+                            @if (Model.Any())
+                            {
+                                int i = 0;
+                                <table class="table" style="align-items: center;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Hình ảnh</th>
+                                            <th scope="col">Tiêu đề</th>
+                                            <th scope="col">Nội dung</th>
+                                            <th scope="col" style="padding-left: 20px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>
+                                                    <img style="width: 50px; height: 50px;" src="@item.UrlImage" alt="...">
+                                                </td>
+                                                <td>@item.Tieude</td>
+                                                <td>
+                                                    <div class="group-text">
+                                                        <i class="fa fa-info"></i>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("CapNhatBaiViet", "QuanLyBaiViet", new { Areas="Admin", id = item.IdBlog })" style="color: #000;">
+                                                        <i class="fa fa-pencil-alt " id="first-icon"></i>
+                                                    </a><i class="fa fa-trash-alt" id="trash-icon"></i>
+                                                </td>
+                                            </tr>
+                                            <div class="notification" id="notes">
+                                                <div class="note-group">
+                                                    <p>Bạn xác nhận xóa?</p>
+                                                    <div class="note-btn">
+                                                        <a href="@Url.Action("XoaBaiViet", "QuanLyBaiViet", new { Areas="Admin", id = item.IdBlog })">
+                                                            <button class="setting-btn">Xác nhận </button>
+
+                                                        </a>
+                                                        <button class="setting-btn cancel-btn" id="cancel-btn">Hủy</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="information" id=infor-part>
+                                                <button class="close-btn"><i class="fa fa-times"></i></button>
+                                                <div class="text">
+                                                    <p style="color: #252733;
+                                                font-size: 16px;">
+                                                        @item.MoTa
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <img src="~/images/no-result-icon.jpg" style="height:450px; width:450px">
+                            }
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="button-group">
+                                <button class="setting-btn">
+                                    <a href="@Url.Action("ThemBaiViet", "QuanLyBaiViet", new { Areas="Admin"})" "
+                                       style="display: block;width: 100%;height: 50px;line-height: 50px;text-decoration: none;color: #fff;">
+                                        Thêm
+                                        mới
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+﻿@model QuanLyKhachSan.Models.TrangBaiViet.ChiTietTrangBaiViet
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="header__section">
+    <div class="top__nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="tn-left">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="SĐT").MoTa
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            @context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Email").MoTa
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="tn-right">
+                        <div class="social" style="margin:10px">
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Facebook").MoTa"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Instagram").MoTa"><i class="fab fa-instagram"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link YouTube").MoTa"><i class="fab fa-youtube"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Linkedin").MoTa"><i class="fab fa-linkedin"></i></a>
+                            <a href="@context.ThongTinWebs.FirstOrDefault(c=>c.LoaiThongTin=="Link Twitter").MoTa"><i class="fab fa-twitter"></i></a>
+                        </div>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="home.html">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 left">
+                    <div class="menu">
+                        <div class="menu_left">
+                            <ul>
+                                <li><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
+                                <li><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
+                                <li class="active"><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
+                                <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/front-end/js/main.js"></script>
+    <link rel="stylesheet" href="~/front-end/css/style.css">
+</header>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                
+                    <div class="col-md-12">
+                        <h2 class="mb-4">@Model.Tieude</h2>
+                        <div id="carouselExampleIndicators" class="carousel slide carousel-blog-detail">
+                            <div class="carousel-indicators">
+                                @for(int i = 0; i < Model.UrlImage.Count; i++)
+                                {
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="active" aria-current="true" aria-label="Slide @(i+1)">
+                                        <img src="@Model.UrlImage[i]" alt="">
+                                    </button>
+                                }
+                                
+                                
+                            </div>
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < Model.UrlImage.Count; i++)
+                                {
+                                    @if (i == 0)
+                                    {
+                                        <div class="carousel-item carousel-item-detail active">
+                                            <img src="@Model.UrlImage[i]" class="d-block w-100" alt="...">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item carousel-item-detail">
+                                            <img src="@Model.UrlImage[i]" class="d-block w-100" alt="...">
+                                        </div>
+                                    }
+                                }
+                                
+                              
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 room-single mt-4 mb-5">
+                        <p>
+                           @Model.MoTa
+                        </p>
+                    </div>
+            </div>
+                    
+                        
+                    
+                   
+                    <div class="col-lg-4">
+                        <div class="sidebar-box">
+                            <h3>Có thể bạn quan tâm</h3>
+                            @for(int i=0;i<Model.baiVietKhaDungs.Count;i++)
+                            {
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4"><img src="@Model.baiVietKhaDungs[i].UrlImage" alt=""></a>
+                                <div class="text">
+                                    <h3 class="heading">
+                                    <a href="@Url.Action("ChiTietBaiViet", "BaiViet", new { Areas="", id=Model.baiVietKhaDungs[i].IdBlog} )">
+                                            @Model.baiVietKhaDungs[i].Tieude
+                                        </a>
+                                    </h3>
+                                    
+                                </div>
+                            </div>
+                            }
+                            
+                            
+                        </div>
+                       
+                    </div>
+
+
+            
+            
+        </div>
+    </div>
+</section>

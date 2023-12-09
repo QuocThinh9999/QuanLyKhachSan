@@ -1,0 +1,8 @@
+﻿@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@if(context.ThongBaos.FirstOrDefault(c=>c.TenThongBao=="email").Tttb!=0)
+{
+    <div class="circle"
+         style="width: 25px;height: 20px;border-radius: 50%;background: red;position: absolute;top: 5px;right: 5px;box-shadow:0 0 10px #dfa974;display: flex;align-items: center;justify-content: center;">
+        <span style="font-size: 13px; color: #ffff;">@context.ThongBaos.FirstOrDefault(c=>c.TenThongBao=="email").Tttb</span>
+    </div>
+}

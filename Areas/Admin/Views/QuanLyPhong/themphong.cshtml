@@ -1,0 +1,103 @@
+﻿@model QuanLyKhachSan.Areas.Admin.Models.ThemPhong
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
+@{
+    ViewData["Title"] = "Themloaiphong";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="dasboard-desciption">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="padding-top" style="height: 62px;"></div>
+                <div class="header-inner">
+                    <form action="
+                            " style="width: 100%;">
+                        <div class="iner-search">
+                            <div class="left" style="display: flex;">
+                                <input type="text" class="form-control" placeholder="Search Here"
+                                       aria-label="Username" aria-describedby="basic-addon1"
+                                       style="box-shadow: none;">
+                                <button type="button" class="btn-search">Tìm kiếm</button>
+                            </div>
+                            <div class="sidebar-btn" id="sidebar-active">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <div class="admin-icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="slider">
+                <p style="color: #fff; padding-left: 40px;">Quản lý phòng</p>
+            </div>
+            <div class="image">
+                <div class="container-fluid">
+                    <div class="row">
+                        <form asp-area="Admin" asp-controller="QuanLyPhong" asp-action="ThemPhong" method="post" enctype="multipart/form-data">
+                            <div class="col-lg-10">
+                                <div class="image-title" style="margin-bottom: 50px;">
+                                    <h2>Thêm mới phòng</h2>
+                                    <h6>Cập nhật thông tin phòng: </h6>
+                                </div>
+                                <div class="image-infor">
+                                    <div class="input-group mb-3">
+                                        <span name="TenPhong " class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên phòng</span>
+                                        <input name="TenPhong" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên loại phòng</span>
+                                        <select name="IdLoaiPhong" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1">
+                                            @foreach (var item in context.LoaiPhongs)
+                                            {
+                                                <option value="@item.IdLoaiPhong">@item.TenLoaiPhong</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giá phòng</span>
+                                        <input name="GiaPhong" type="text" class="form-control" placeholder="Nhập giá phòng" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Số trẻ em</span>
+                                        <input name="SoTreEm" type="text" class="form-control" placeholder="Nhập số trẻ em" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Số người lớn</span>
+                                        <input name="SoNguoiLon" type="text" class="form-control" placeholder="Nhập số người lớn" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Diện tích</span>
+                                        <input name="DienTich" type="text" class="form-control" placeholder="Nhập diện tích" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Số lượng phòng</span>
+                                        <input name="SoLuong" type="text" class="form-control" placeholder="Nhập số lượng" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Mô tả</span>
+                                        <input name="MoTa" type="text" class="form-control" placeholder="Nhập mô tả" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Chọn ảnh</span>
+                                        <input name="Images" type="file" class="form-control" aria-describedby="basic-addon1" multiple>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="button-group">
+                                    <button class="setting-btn" type="submit">Thêm mới</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   

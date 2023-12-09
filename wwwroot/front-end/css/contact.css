@@ -1,0 +1,67 @@
+.contact-infor{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.address h2{
+    font-size: 44px;
+    color: #19191a;
+    margin-bottom: 24px;
+}
+.address h2 p{
+    font-size: 16px;
+    font-family: "Cabin", sans-serif;
+    color: #6b6b6b;
+    font-weight: 400;
+    line-height: 26px;
+    margin: 0 0 15px 0;
+}
+.address table tbody tr td:first-child{
+    color: #707079;
+    width: 100px;
+}
+.address table tbody tr td:last-child{
+    font-size: 16px;
+    color: #19191a;
+    line-height: 36px;
+    font-weight: 500;
+}
+.form-group input{
+    width: 100%;
+    height: 50px;
+    border: 1px solid #e1e1e1;
+    font-size: 16px;
+    color: #aaaab3;
+    padding-left: 25px;
+    margin-bottom: 28px;
+}
+.form-group input:focus{
+    outline: none;
+}
+.form-group .row .col-lg-12 textarea{
+    height: 150px;
+    padding-left: 25px;
+    padding-top: 12px;
+    margin-bottom: 33px;
+    border: 1px solid #e1e1e1;
+    font-size: 16px;
+    color: #aaaab3;
+    resize: none;
+}
+.form-group .row .col-lg-12 textarea:focus{
+    outline: none;
+}
+.form-group button{
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+    letter-spacing: 2px;
+    background: #dfa974;
+    border: none;
+    padding: 14px 34px 13px;
+    display: inline-block;
+}
+.map iframe {
+    box-shadow: 12px 12px 30px rgba(41, 43, 46, 0.27);
+}
