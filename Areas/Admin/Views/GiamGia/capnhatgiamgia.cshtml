@@ -42,6 +42,10 @@
                                 <div class="image-title" style="margin-bottom: 50px;">
                                     <h2>Thông tin giá phòng</h2>
                                     <h6>Cập nhật thông tin giảm giá: </h6>
+                                    @if (TempData["error"] != null)
+                                    {
+                                        <div style="color: red;">@TempData["error"]</div>
+                                    }
                                 </div>
                                 <div class="image-infor">
                                     <div class="input-group mb-3">
@@ -51,11 +55,11 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giá phòng</span>
-                                        <input name="GiaPhong" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1" value="@Model.GiaPhong.ToString("N0")">
+                                        <input name="GiaPhong" type="text" class="form-control" placeholder="Giá phòng" aria-describedby="basic-addon1" value="@Model.GiaPhong.ToString("N0")">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giá sau giảm</span>
-                                        <input name="GiaSauGiam" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1" value="@Model.GiaSauGiam.ToString("N0")">
+                                        <input name="GiaSauGiam" type="text" class="form-control" placeholder="Giá sau giảm" aria-describedby="basic-addon1" value="@Model.GiaSauGiam.ToString("N0")">
                                     </div>
 
 

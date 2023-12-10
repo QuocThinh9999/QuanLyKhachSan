@@ -67,6 +67,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 return result;
             }
             var item= _context.Phongs.Find(id);
+            if (input.GiaSauGiam > input.GiaPhong)
+            {
+                TempData["error"] = "Giá sau giảm phải nhỏ hơn hoặc bằng giá phòng!";
+                return View(item);
+            }
             item.GiaPhong=input.GiaPhong;
             item.GiaSauGiam=input.GiaSauGiam;
             _context.Phongs.Update(item);

@@ -166,7 +166,7 @@
                         </h2>
                     </div>
                     <p class="para1">
-                        @Model.thongTinWeb.Find(c=>c.LoaiThongTin=="Intercontinental LA Minh Minh Hotel").MoTa
+                        @Model.thongTinWeb.Find(c=>c.LoaiThongTin=="Giới thiệu").MoTa
                     </p>           
                     <a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">
                         <button class="about_btn">Đọc thêm</button>
@@ -178,10 +178,10 @@
                 <div class="picture">
                     <div class="row">
                         <div class="col-sm-6">
-                            <img src="@Model.thongTinWeb.FirstOrDefault(c=>c.LoaiThongTin=="Travel & Camping").UrlImages" alt="">
+                            <img src="@Model.thongTinWeb.FirstOrDefault(c=>c.LoaiThongTin=="Du Lịch & Cắm Trại").UrlImages" alt="">
                         </div>
                         <div class="col-sm-6">
-                            <img src="@Model.thongTinWeb.FirstOrDefault(c=>c.LoaiThongTin=="Restaurants Services").UrlImages" alt="">
+                            <img src="@Model.thongTinWeb.FirstOrDefault(c=>c.LoaiThongTin=="Dịch Vụ Nhà Hàng").UrlImages" alt="">
                         </div>
                     </div>
                 </div>

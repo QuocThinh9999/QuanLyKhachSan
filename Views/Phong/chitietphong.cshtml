@@ -169,7 +169,7 @@
                             {
                                 <div class="col-sm col-md-6">
                                 <div class="room">
-                                    <a href="rooms.html"
+                                        <a href="@Url.Action("ChiTietPhong", "Phong", new { Areas="", id=Model.phongKhaDungs[i].id} )"
                                        class="img img-2 d-flex justify-content-center align-items-center"
                                            style="background-image: url(@Model.phongKhaDungs[i].Url);">
                                         <img src="@Model.phongKhaDungs[i].Url" alt="" 
@@ -179,7 +179,7 @@
                                         </div>
                                     </a>
                                     <div class="text p-3 text-center">
-                                        <h3 class="mb-3"><a href="rooms.html">@Model.phongKhaDungs[i].TenPhong</a></h3>
+                                            <h3 class="mb-3"><a href="@Url.Action("ChiTietPhong", "Phong", new { Areas="", id=Model.phongKhaDungs[i].id} )">@Model.phongKhaDungs[i].TenPhong</a></h3>
                                         <p>
                                                 @if (Model.phongKhaDungs[i].GiaSauGiam != Model.phongKhaDungs[i].GiaPhong)
                                                 {

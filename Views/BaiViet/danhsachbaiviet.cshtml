@@ -96,7 +96,7 @@
             <div class="col-md-12">
             <form class="search-blog-main" asp-controller="BaiViet" asp-action="DanhSachBaiViet" method="post" enctype="multipart/form-data">
                     <input type="search" name="ten" id="search-blog">
-                    <button class="search-box-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="search-box-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
         </div>
@@ -148,7 +148,7 @@
     <!-- Include jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+    @* <script>
         $(document).ready(function () {
             var itemsToShow = 6; // Number of items to initially show
             var $blogItems = $('.blog-section .container .blog-item');
@@ -167,7 +167,7 @@
                 }
             });
         });
-    </script>
+    </script> *@
 
 
 

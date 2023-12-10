@@ -3,10 +3,10 @@
     public class OutputImage
     {
         public string? UrlImage { get; set; }
-        public OutputImage()
-        {
-            UrlImage = null;
+        //public OutputImage()
+        //{
+        //    UrlImage = null;
            
-        }
+        //}
     }
 }

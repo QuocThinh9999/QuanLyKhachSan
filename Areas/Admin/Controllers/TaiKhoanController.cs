@@ -29,32 +29,37 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DangNhap(InputDangNhap input)
         {
-            string mk=EncryptPassword(input.Password);
-            var item = _context.NguoiDungs.FirstOrDefault(c => c.Email == input.Email && c.MatKhau == mk);
-            if(item != null)
+            if (ModelState.IsValid)
             {
-                var xt=_context.XacThucs.FirstOrDefault(c=>c.IdNguoiDung==item.IdNguoiDung);
-                if (xt.TrangThai==1)
+                string mk = EncryptPassword(input.Password);
+                var item = _context.NguoiDungs.FirstOrDefault(c => c.Email == input.Email && c.MatKhau == mk);
+                if (item != null)
                 {
-                    Response.Cookies.Append("Id", item.IdNguoiDung);
-                    Response.Cookies.Append("Role", item.IdQuyen);
-                    Response.Cookies.Append("UserName", item.Ten);
-                    return CheckRole(item.IdQuyen);
+                    var xt = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == item.IdNguoiDung);
+                    if (xt.TrangThai == 1)
+                    {
+                        Response.Cookies.Append("Id", item.IdNguoiDung);
+                        Response.Cookies.Append("Role", item.IdQuyen);
+                        Response.Cookies.Append("UserName", item.Ten);
+                        return CheckRole(item.IdQuyen);
+                    }
+                    if (xt.TrangThai == 2)
+                    {
+                        TempData["error"] = "Tài khoản của bạn đã bị chặn";
+                        return View();
+                    }
+                    if (xt.TrangThai == 0)
+                    {
+                        SendOTP(input.Email, item.IdNguoiDung);
+
+                        return RedirectToAction("XacThuc", "TaiKhoan", new { Areas = "Admin", id = item.IdNguoiDung });
+
+                    }
                 }
-                if(xt.TrangThai==2)
-                {
-                    TempData["error"] = "Tài khoản của bạn đã bị chặn";
-                    return View();
-                }
-                if(xt.TrangThai==0)
-                {
-                    SendOTP(input.Email, item.IdNguoiDung);
-                    
-                    return RedirectToAction("XacThuc", "TaiKhoan", new { Areas = "Admin", id=item.IdNguoiDung});
-                   
-                }   
+                TempData["error"] = "Email hoặc mật khẩu không đúng";
+                return View();
             }
-            TempData["error"] = "Email hoặc mật khẩu không đúng";
+            TempData["error"] = "Vui lòng nhập đủ thông tin để đăng nhập";
             return View();
         }
         private string EncryptPassword(string password)
@@ -98,6 +103,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                     TempData["error"] = "Mật khẩu xác nhận không đúng";
                     return View(input);
                 }
+                if (input.Password.Length<4)
+                {
+                    TempData["error"] = "Mật khẩu phải từ 4 kí tự";
+                    return View(input);
+                }
                 var item=_context.NguoiDungs.FirstOrDefault(c=>c.Email==input.Email);
                 if (item == null)
                 {
@@ -131,11 +141,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                         return RedirectToAction("DangNhap", "TaiKhoan", new { Areas = "Admin" });
                     }
                 }
-                else 
-                {
-                    TempData["error"] = "Email đã tồn tại";
-                    return View(input);
-                }  
+                 
             }
             TempData["error"] = "Vui lòng nhập đầy đủ thông tin";
             return View(input);
@@ -198,7 +204,16 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             var nguoidung = _context.NguoiDungs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
             if (ModelState.IsValid)
             {
-               
+                if (input.MatKhauMoi != input.MatKhauMoi2)
+                {
+                    TempData["error"] = "Mật khẩu xác nhận không đúng";
+                    return View(nguoidung);
+                }
+                if (input.MatKhauMoi.Length < 4)
+                {
+                    TempData["error"] = "Mật khẩu phải từ 4 kí tự";
+                    return View(nguoidung);
+                }
                 nguoidung.MatKhau = EncryptPassword(input.MatKhauMoi);
                 _context.NguoiDungs.Update(nguoidung);
                 _context.SaveChanges();
@@ -223,7 +238,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             var item = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
             if (ModelState.IsValid)
             {
-               
+                
                 if (input.MaXacThuc == item.MaXacThuc)
                 {
                     item.TrangThai = 1;
