@@ -14,7 +14,4 @@ public partial class LoaiPhong
 
     [StringLength(100)]
     public string? TenLoaiPhong { get; set; }
-
-    [InverseProperty("IdLoaiPhongNavigation")]
-    public virtual ICollection<Phong> Phongs { get; set; } = new List<Phong>();
 }

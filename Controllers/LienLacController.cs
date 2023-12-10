@@ -35,7 +35,7 @@ namespace QuanLyKhachSan.Controllers
             tuvan.Ten=input.Ten;
             tuvan.Email=input.Email;
             var tb = _context.ThongBaos.FirstOrDefault(c => c.TenThongBao == "email");
-            tb.Tttb = 1;
+            tb.Tttb = tb.Tttb+1;
             _context.TuVans.Add(tuvan);
             _context.ThongBaos.Update(tb);
             _context.SaveChanges();

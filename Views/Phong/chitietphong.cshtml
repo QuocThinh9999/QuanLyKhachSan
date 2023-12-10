@@ -213,7 +213,7 @@
                 <div class="sidebar-box">
                     <div class="booking_form-room-detail">
                         <h2>
-                            Booking Your Hotel
+                            Đặt phòng ngay
                         </h2>
                         <form asp-area="" asp-controller="HoaDon" asp-action="MauHoaDon" method="post" enctype="multipart/form-data">
                             <div class="check-date">
@@ -233,11 +233,9 @@
                                 </div>
                                 @if (TempData["error"] != null)
                                 {
-                                    <span class="noti-text" id="validation-notes">
-                                       @TempData["error"]
-                                    </span>
+                                    <div style="color: red;">@TempData["error"]</div>
                                 }
-                                
+                               
                             </div>
                             <button class="check-available" type="submit" id="checkdate-btn">Đặt ngay</button>
                         </form>

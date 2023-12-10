@@ -39,11 +39,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 viewPhong.Id = item.Id;
                 viewPhong.TenPhong = item.TenPhong;
                 viewPhong.TenLoaiPhong = loaiphong.TenLoaiPhong;
-                viewPhong.ChiTietPhong = item.ChiTietPhong;
+                //viewPhong.ChiTietPhong = item.ChiTietPhong;
                 viewPhong.SoLuong = item.SoLuong;
                 viewPhong.GiaPhong = item.GiaPhong;
                 viewPhong.GiaSauGiam = item.GiaSauGiam;
-                viewPhong.HoaDons = item.HoaDons;
+                //viewPhong.HoaDons = item.HoaDons;
 
                 var ListUrl = System.Text.Json.JsonSerializer.Deserialize<List<OutputImage>>(item.UrlImage);
                 viewPhong.UrlImages = new List<string>();
@@ -78,11 +78,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 viewPhong.Id = item.Id;
                 viewPhong.TenPhong = item.TenPhong;
                 viewPhong.TenLoaiPhong = loaiphong.TenLoaiPhong;
-                viewPhong.ChiTietPhong = item.ChiTietPhong;
+                //viewPhong.ChiTietPhong = item.ChiTietPhong;
                 viewPhong.SoLuong = item.SoLuong;
                 viewPhong.GiaPhong = item.GiaPhong;
                 viewPhong.GiaSauGiam = item.GiaSauGiam;
-                viewPhong.HoaDons = item.HoaDons;
+                //viewPhong.HoaDons = item.HoaDons;
 
                 var ListUrl = System.Text.Json.JsonSerializer.Deserialize<List<OutputImage>>(item.UrlImage);
                 viewPhong.UrlImages = new List<string>(); 
@@ -110,11 +110,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 var chitietphong = _context.ChiTietPhongs.FirstOrDefault(ctp => ctp.IdPhong == phong.Id);
                 _context.ChiTietPhongs.Remove(chitietphong);
                 var hoadon = _context.HoaDons.Where(c => c.IdPhong == phong.Id).ToList();
-                foreach (var hd in hoadon)
-                {
-                    var danhgias = _context.DanhGia.FirstOrDefault(dg => dg.IdHoaDon == hd.IdHoaDon);
-                    _context.DanhGia.Remove(danhgias);
-                }
+                
                 if (phong.UrlImage != null)
                 {
                     var Urlcu = System.Text.Json.JsonSerializer.Deserialize<List<OutputImage>>(phong.UrlImage);
@@ -162,7 +158,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                     GiaPhong = input.GiaPhong,
                     GiaSauGiam = input.GiaPhong,         
                     IdLoaiPhong = input.IdLoaiPhong,
-                    IdLoaiPhongNavigation = _context.LoaiPhongs.FirstOrDefault(c => c.IdLoaiPhong == input.IdLoaiPhong),
+                    
 
                 };
                 List<OutputImage> listimage = new List<OutputImage>();
@@ -182,7 +178,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                     SoTreEm = input.SoTreEm,
                     DienTich = input.DienTich,
                     MoTa = input.MoTa,
-                    IdPhongNavigation = phong,
+                   
                 };
                 _context.ChiTietPhongs.Add(chiTietPhong);
                 _context.SaveChanges();

@@ -39,8 +39,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-10">
+                            @if (Model.Any())
+                            {
                             <div class="image-title">
                                 <h2>Danh sách tư vấn</h2>
+                                
                                 @if (Model.FirstOrDefault().SoThongBao == 0)
                                                     {
                                     <h6>Thông tin tư vấn: </h6>
@@ -50,8 +53,7 @@
                                     <h6>Bạn có <span class="text-danger">@Model.FirstOrDefault().SoThongBao</span> thông báo mới!</h6>
                                 }
                             </div>
-                            @if (Model.Any())
-                            {
+                           
                                 int i = 0;
                                 <table class="table" style="align-items: center;">
                                     <thead>

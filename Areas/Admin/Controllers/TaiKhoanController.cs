@@ -83,7 +83,9 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
         [Route("dang-ky")]
         public IActionResult DangKy()
         {
-            return View();
+            var item = new InputDangKy();
+            
+            return View(item);
         }
         [Route("dang-ky")]
         [HttpPost]
@@ -91,7 +93,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-
+                if (input.Password != input.Password2)
+                {
+                    TempData["error"] = "Mật khẩu xác nhận không đúng";
+                    return View(input);
+                }
                 var item=_context.NguoiDungs.FirstOrDefault(c=>c.Email==input.Email);
                 if (item == null)
                 {
@@ -116,8 +122,8 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                     var xacthuc2 = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == item.IdNguoiDung);
                     if(xacthuc2.TrangThai==2)
                     {
-                        ViewBag.error = "Tài khoản của bạn đã bị chặn";
-                        return View();
+                        TempData["error"] = "Tài khoản của bạn đã bị chặn";
+                        return View(input);
                     }
                     if(xacthuc2.TrangThai==1||xacthuc2.TrangThai==0)
                     {
@@ -127,11 +133,12 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 }
                 else 
                 {
-                    ViewBag.error = "Email đã tồn tại";
-                    return View();
+                    TempData["error"] = "Email đã tồn tại";
+                    return View(input);
                 }  
             }
-            return View();
+            TempData["error"] = "Vui lòng nhập đầy đủ thông tin";
+            return View(input);
         }
         [Route("Quen-mat-khau")]
         public IActionResult QuenMatKhau()
@@ -162,19 +169,21 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult QuenMatKhau2(InputOTP input)
         {
-            if(ModelState.IsValid)
+            var nd = _context.NguoiDungs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
+            if (ModelState.IsValid)
             {
                 var item = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
+                
                 if(input.MaXacThuc==item.MaXacThuc)
                 {
                     return RedirectToAction("DoiLaiMatKhau", "TaiKhoan", new { Areas = "Admin", id=item.IdNguoiDung });
                 }
                     TempData["error"] = "Mã xác thực không đúng";
-                    return View();
+                    return View(nd);
                 
             }
             TempData["error"] = "Vui lòng nhập mã xác thực";
-            return View();
+            return View(nd);
         }
         [Route("Doi-lai-mat-khau")]
         public IActionResult DoiLaiMatKhau(string id)
@@ -186,34 +195,35 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DoiLaiMatKhau(DoiMatKhau input)
         {
+            var nguoidung = _context.NguoiDungs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
             if (ModelState.IsValid)
             {
-                var nguoidung=_context.NguoiDungs.FirstOrDefault(c=>c.IdNguoiDung==input.IdNguoiDung);
+               
                 nguoidung.MatKhau = EncryptPassword(input.MatKhauMoi);
                 _context.NguoiDungs.Update(nguoidung);
                 _context.SaveChanges();
                 return RedirectToAction("DangNhap", "TaiKhoan", new { Areas = "Admin" });
             }
             TempData["error"] = "Vui lòng nhập mật khẩu";
-            return View();
+            return View(nguoidung);
         }
         [Route("xac-thuc")]
         public IActionResult XacThuc(string id)
         {
             var item = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == id);
-            if(item!=null)
-            {
+            
             return View(item);
-            }
-            return View();
+            
+            
         }
         [Route("xac-thuc")]
         [HttpPost]
         public IActionResult XacThuc(InputOTP input)
         {
-            if(ModelState.IsValid)
+            var item = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
+            if (ModelState.IsValid)
             {
-                var item = _context.XacThucs.FirstOrDefault(c => c.IdNguoiDung == input.IdNguoiDung);
+               
                 if (input.MaXacThuc == item.MaXacThuc)
                 {
                     item.TrangThai = 1;
@@ -224,12 +234,12 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 else
                 {
                     TempData["error"] = "Mã OTP của bạn không đúng";
-                    return View();
+                    return View(item);
                 }
 
             }
             TempData["erroe"] = "Vui lòng nhập OTP";
-            return View();
+            return View(item);
         }
         [HttpPost]
         public IActionResult SendOTP(string email, string id)
@@ -249,8 +259,9 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             string emailTemplate = @"
 <html>
 <body style='width:100%'>
-    <h1>OTP Verification</h1>
-    <p>Your OTP is: " + otp + @"</p>
+    <h1>Xác thực tài khoản</h1>
+    <h3>Mã xác thực: " + otp + @"</h3>
+    <p class='text-danger'>Lưu ý: không chia sẻ mã xác thực cho bất kì ai, nếu không phải bạn, vui lòng bỏ qua email này</p>
 <footer style='width:100%'>
     <img src='cid:footerImage' style='width:100%; height:100%; object-fit:contain' alt='Footer Image'>
 </footer>

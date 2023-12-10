@@ -141,10 +141,10 @@
                                 <input type="datetime" class="date-input " id="hasDatepicker2" name="GioCheckout">
                                 <div class="icon"><i class="fa fa-calendar-week"></i></div>
                             </div>
-                            <span class="noti-text" id="validation-notes">
-                                * Ngày check-out phải sau ngày
-                                check-in.Vui lòng chọn lại
-                            </span>
+                                @if (TempData["error"] != null)
+                                {
+                                    <div style="color: red;">@TempData["error"]</div>
+                                }
                         </div>
                         <div class="select-option">
                             <p>Người lớn:</p>
@@ -173,17 +173,17 @@
                             <div class="range-slider" style="text-align: center;">
                                 <span class="price__input">
                                     Từ:
-                                    <input class="input-min" type="number" value="0" min="0" max="120000" name="GiaPhongMin"> -
+                                    <input class="input-min" type="number" value="0" min="0" max="12000000" name="GiaPhongMin"> -
                                     Đến:
-                                    <input class="input-max" type="number" value="120000" min="0" max="120000" name="GiaPhongMax">
+                                    <input class="input-max" type="number" value="12000000" min="0" max="12000000" name="GiaPhongMax">
                                 </span>
                                 <div class="slider">
                                     <div class="progress"></div>
                                 </div>
                                 <div class="range-input">
-                                        <input class="range-min" value="100000" min="100000" max="12000000" step="1000"
+                                        <input class="range-min" value="100000" min="100000" max="1200000000" step="1000"
                                            type="range">
-                                        <input class="range-max" value="12000000" min="100000" max="12000000" step="1000"
+                                        <input class="range-max" value="1200000000" min="100000" max="1200000000" step="1000"
                                            type="range">
                                 </div>
 

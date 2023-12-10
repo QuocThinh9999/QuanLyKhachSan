@@ -66,11 +66,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 var chitietphong = _context.ChiTietPhongs.FirstOrDefault(ctp => ctp.IdPhong == phong.Id);
                 _context.ChiTietPhongs.Remove(chitietphong);
                 var hoadon = _context.HoaDons.Where(c => c.IdPhong == phong.Id).ToList();
-                foreach (var hd in hoadon)
-                {
-                    var danhgias = _context.DanhGia.FirstOrDefault(dg => dg.IdHoaDon == hd.IdHoaDon);
-                    _context.DanhGia.Remove(danhgias);
-                }
+                
                 _context.HoaDons.RemoveRange(hoadon);
             }
             _context.Phongs.RemoveRange(phongs);

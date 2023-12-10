@@ -87,6 +87,16 @@ namespace QuanLyKhachSan.Controllers
         [HttpPost]
         public IActionResult DanhSachCheckPhong(CheckPhong input)
         {
+            if (input.GioCheckin > input.GioCheckout)
+            {
+                TempData["error"] = "Ngày check out phải sau check in!";
+                return RedirectToAction("DanhSachPhong", "Phong");
+            }
+            if (input.GioCheckin <= DateTime.Now)
+            {
+                TempData["error"] = "Ngày check in phải từ ngày hiện tại!";
+                return RedirectToAction("DanhSachPhong", "Phong");
+            }
             var danhSachPhong = _context.Phongs
     .Join(_context.ChiTietPhongs,
         phong => phong.Id,

@@ -56,13 +56,13 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             {
                 return result;
             }
-            var tb = _context.ThongBaos.FirstOrDefault(c => c.TenThongBao == "email");
+            
 
 
             var tuvans = _context.TuVans.OrderByDescending(tv => tv.NgayGioNhan).ToList();
             if(ten!=null)
             {
-                tuvans = _context.TuVans.OrderByDescending(tv => tv.NgayGioNhan).Where(tv => tv.Ten.Contains((ten ?? "").ToLower())).ToList();
+                tuvans = _context.TuVans.OrderByDescending(tv => tv.NgayGioNhan).Where(tv => tv.Email.Contains((ten?? "").ToLower())).ToList();
             }
             List<ViewThongBao> vtbs = new List<ViewThongBao>();
             foreach (var tuvan in tuvans)
@@ -73,12 +73,9 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 vtb.NgayGioNhan = tuvan.NgayGioNhan;
                 vtb.Ten = tuvan.Ten;
                 vtb.Email = tuvan.Email;
-                vtb.SoThongBao = tb.Tttb;
+                vtb.SoThongBao = 0;
                 vtbs.Add(vtb);
             }
-            tb.Tttb = 0;
-            _context.ThongBaos.Update(tb);
-            _context.SaveChanges();
             return View(vtbs);
         }
         [Route("xoa-tu-van")]
@@ -91,7 +88,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 return result;
             }
             var tuvan=_context.TuVans.FirstOrDefault(c=>c.IdTuVan==id);
-            _context.TuVans.Update(tuvan);
+            _context.TuVans.Remove(tuvan);
             _context.SaveChanges();
             return RedirectToAction("DanhSachTuVan", "QuanLyTuVan", new { Areas = "Admin" });
         }

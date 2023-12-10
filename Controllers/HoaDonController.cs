@@ -37,7 +37,12 @@ namespace QuanLyKhachSan.Controllers
 					TempData["error"] = "Ngày check out phải sau check in!";
                     return RedirectToAction("ChiTietPhong", "Phong", new { id = input.IdPhong });
                 }
-				var phong = _context.Phongs.FirstOrDefault(c => c.Id == input.IdPhong);
+                if (input.GioCheckin <= DateTime.Now)
+                {
+                    TempData["error"] = "Ngày check in phải từ ngày hiện tại!";
+                    return RedirectToAction("ChiTietPhong", "Phong", new { id = input.IdPhong });
+                }
+                var phong = _context.Phongs.FirstOrDefault(c => c.Id == input.IdPhong);
 				var checkphong = _context.HoaDons.Where(c => c.IdPhong == input.IdPhong && c.GioCheckout > DateTime.Now && c.TrangThai == "Chờ nhận phòng").ToList();
 				int i = 0;
 				foreach (var cp in checkphong)

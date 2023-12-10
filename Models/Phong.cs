@@ -27,14 +27,4 @@ public partial class Phong
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal GiaSauGiam { get; set; }
-
-    [InverseProperty("IdPhongNavigation")]
-    public virtual ChiTietPhong? ChiTietPhong { get; set; }
-
-    [InverseProperty("IdPhongNavigation")]
-    public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
-
-    [ForeignKey("IdLoaiPhong")]
-    [InverseProperty("Phongs")]
-    public virtual LoaiPhong? IdLoaiPhongNavigation { get; set; }
 }

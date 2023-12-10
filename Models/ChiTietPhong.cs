@@ -19,8 +19,4 @@ public partial class ChiTietPhong
     public int? DienTich { get; set; }
 
     public string? MoTa { get; set; }
-
-    [ForeignKey("IdPhong")]
-    [InverseProperty("ChiTietPhong")]
-    public virtual Phong IdPhongNavigation { get; set; } = null!;
 }

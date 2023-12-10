@@ -17,12 +17,4 @@ public partial class DanhGium
     public int? SoSao { get; set; }
 
     public string? NhanXet { get; set; }
-
-    [ForeignKey("IdHoaDon")]
-    [InverseProperty("DanhGium")]
-    public virtual HoaDon IdHoaDonNavigation { get; set; } = null!;
-
-    [ForeignKey("IdNguoiDung")]
-    [InverseProperty("DanhGia")]
-    public virtual NguoiDung? IdNguoiDungNavigation { get; set; }
 }

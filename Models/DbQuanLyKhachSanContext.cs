@@ -44,44 +44,9 @@ public partial class DbQuanLyKhachSanContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ChiTietPhong>(entity =>
-        {
-            entity.HasOne(d => d.IdPhongNavigation).WithOne(p => p.ChiTietPhong)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ChiTietPhong_Phong");
-        });
-
-        modelBuilder.Entity<DanhGium>(entity =>
-        {
-            entity.HasOne(d => d.IdHoaDonNavigation).WithOne(p => p.DanhGium)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DanhGia_HoaDon");
-
-            entity.HasOne(d => d.IdNguoiDungNavigation).WithMany(p => p.DanhGia).HasConstraintName("FK_DanhGia_NguoiDung");
-        });
-
-        modelBuilder.Entity<HoaDon>(entity =>
-        {
-            entity.HasOne(d => d.IdNguoiDungNavigation).WithMany(p => p.HoaDons).HasConstraintName("FK_HoaDon_NguoiDung");
-
-            entity.HasOne(d => d.IdPhongNavigation).WithMany(p => p.HoaDons).HasConstraintName("FK_HoaDon_Phong");
-        });
-
-        modelBuilder.Entity<Phong>(entity =>
-        {
-            entity.HasOne(d => d.IdLoaiPhongNavigation).WithMany(p => p.Phongs).HasConstraintName("FK_Phong_LoaiPhong");
-        });
-
         modelBuilder.Entity<TuVan>(entity =>
         {
             entity.Property(e => e.IdTuVan).HasDefaultValueSql("(N'')");
-        });
-
-        modelBuilder.Entity<XacThuc>(entity =>
-        {
-            entity.HasOne(d => d.IdNguoiDungNavigation).WithOne(p => p.XacThuc)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_XacThuc_NguoiDung");
         });
 
         OnModelCreatingPartial(modelBuilder);

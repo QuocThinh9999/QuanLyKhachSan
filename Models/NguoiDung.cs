@@ -34,13 +34,4 @@ public partial class NguoiDung
     public DateTime? NgaySinh { get; set; }
 
     public string? AnhDaiDien { get; set; }
-
-    [InverseProperty("IdNguoiDungNavigation")]
-    public virtual ICollection<DanhGium> DanhGia { get; set; } = new List<DanhGium>();
-
-    [InverseProperty("IdNguoiDungNavigation")]
-    public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
-
-    [InverseProperty("IdNguoiDungNavigation")]
-    public virtual XacThuc? XacThuc { get; set; }
 }

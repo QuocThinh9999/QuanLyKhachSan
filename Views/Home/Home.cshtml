@@ -98,10 +98,10 @@
                                 <input type="datetime" class="date-input " id="hasDatepicker2" name="GioCheckout">
                                 <div class="icon"><i class="fa fa-calendar-week"></i></div>
                             </div>
-                            <span class="noti-text" id="validation-notes">
-                                * Ngày check-out phải sau ngày
-                                check-in.Vui lòng chọn lại
-                            </span>
+                            @if (TempData["error"] != null)
+                            {
+                                <div style="color: red;">@TempData["error"]</div>
+                            }
                         </div>
                         <div class="select-option">
                             <p>Người lớn:</p>
@@ -130,17 +130,17 @@
                             <div class="range-slider" style="text-align: center;">
                                 <span class="price__input">
                                     Từ:
-                                    <input class="input-min" type="number" value="0" min="0" max="120000" name="GiaPhongMin"> -
+                                    <input class="input-min" type="number" value="0" min="0" max="12000000" name="GiaPhongMin"> -
                                     Đến:
-                                    <input class="input-max" type="number" value="120000" min="0" max="120000" name="GiaPhongMax">
+                                    <input class="input-max" type="number" value="12000000" min="0" max="12000000" name="GiaPhongMax">
                                 </span>
                                 <div class="slider">
                                     <div class="progress"></div>
                                 </div>
                                 <div class="range-input">
-                                    <input class="range-min" value="0" min="0" max="120000" step="500"
+                                    <input class="range-min" value="0" min="0" max="12000000" step="500"
                                            type="range">
-                                    <input class="range-max" value="120000" min="0" max="120000" step="500"
+                                    <input class="range-max" value="12000000" min="0" max="12000000" step="500"
                                            type="range">
                                 </div>
 
@@ -199,68 +199,7 @@
                 </div>
             </div>
         </div>
-        @* <div class="row">
-            <div class="col-lg-4">
-                <div class="service_item">
-                    <i class="fa fa-parking"></i>
-                    <h4>Travel Plan</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="service_item">
-                    <i class="fab fa-ravelry"></i>
-                    <h4>Travel Plan</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="service_item">
-                    <i class="fa fa-bed"></i>
-                    <h4>Travel Plan</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="service_item">
-                    <i class="fa fa-parking"></i>
-                    <h4>Travel Plan</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="service_item">
-                    <i class="fa fa-clock"></i>
-                    <h4>Travel Plan</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="service_item">
-                    <i class="fa fa-cocktail"></i>
-                    <h4>Bar & Drink</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna.
-                    </p>
-                </div>
-            </div>
-        </div> *@
+        
     </div>
 </div>
 <div class="room_options">

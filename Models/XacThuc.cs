@@ -16,8 +16,4 @@ public partial class XacThuc
 
     [StringLength(50)]
     public string? MaXacThuc { get; set; }
-
-    [ForeignKey("IdNguoiDung")]
-    [InverseProperty("XacThuc")]
-    public virtual NguoiDung IdNguoiDungNavigation { get; set; } = null!;
 }

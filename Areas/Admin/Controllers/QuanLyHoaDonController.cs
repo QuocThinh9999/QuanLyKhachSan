@@ -47,6 +47,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             tb.Tttb = 0;
             _context.ThongBaos.Update(tb);
             _context.SaveChanges();
+            hoadons = hoadons.OrderByDescending(tv => tv.GioCheckin).ToList();
             return View(hoadons);
         }
         [Route("danh-sach-hoa-don")]
@@ -86,7 +87,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 hoadon.TongTien = item.TongTien;
                 hoadons.Add(hoadon);
             }
-            hoadons = hoadons.OrderByDescending(tv => tv.GioCheckin).ThenByDescending(tv => tv.GioCheckin.TimeOfDay).ToList();
+            hoadons = hoadons.OrderByDescending(tv => tv.GioCheckin).ToList();
             return View(hoadons);
         }
         [Route("cap-nhat-hoa-don")]
