@@ -177,7 +177,7 @@
             reloadPartialView();
             setInterval(function () {
                 reloadPartialView();
-            }, 1000);
+            }, 500);
         });
         function reloadPartialViewHoaDon() {
             $.ajax({
@@ -196,7 +196,7 @@
             reloadPartialViewHoaDon();
             setInterval(function () {
                 reloadPartialViewHoaDon();
-            }, 1000);
+            }, 500);
         });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
