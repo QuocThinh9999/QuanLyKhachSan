@@ -70,7 +70,7 @@
                                         @foreach (var item in Model)
                                         {
                                             i++;
-                                           @*  @if (i <= item.thongbao)
+                                            @if (item.GioCheckin>DateTime.Now)
                                             {
                                                 <tr style="outline: 2px solid black; font-weight: bold;">
 
@@ -79,28 +79,28 @@
                                                     <td><strong>@item.GioCheckin.ToString("dd/MM/yyyy")</strong></td>
                                                     <td><strong>@item.GioCheckout.ToString("dd/MM/yyyy")</strong></td>
                                                     <td><strong>@item.TongTien.ToString("N0")</strong></td>
-                                                        @if (item.TrangThai == "Chờ nhận phòng")
-                                                        {
+                                                    @if (item.TrangThai == "Chờ nhận phòng")
+                                                    {
                                                         <td style="color:orange;"><strong>@item.TrangThai</strong></td>
-                                                        }
-                                                        @if (item.TrangThai == "Đã hủy")
-                                                        {
+                                                    }
+                                                    @if (item.TrangThai == "Đã hủy")
+                                                    {
                                                         <td style="color:red;"><strong>@item.TrangThai</strong></td>
-                                                        }
-                                                        @if (item.TrangThai == "Thành công")
-                                                        {
+                                                    }
+                                                    @if (item.TrangThai == "Thành công")
+                                                    {
                                                         <td style="color:green;"><strong>@item.TrangThai</strong></td>
-                                                        }
+                                                    }
                                                     <td>
                                                         <a href="@Url.Action("CapNhatHoaDon", "QuanLyHoaDon", new { Areas="Admin", id = item.IdHoaDon })" style="color: #000;">
                                                             <strong><i class="fa fa-pencil-alt " id="first-icon"></i></strong>
                                                         </a>
                                                     </td>
-                                                </tr> *@
-                                                
-                                           @*  }
+                                                </tr>
+
+                                            }
                                             else
-                                            { *@
+                                            {
                                                 <tr>
                                                     <th scope="row">@i</th>
                                                     <td>@item.TenNguoiDung</td>
@@ -125,9 +125,9 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            
-                                            
-                                        }
+                                            }
+
+                                    }
                                     </tbody>
                                 </table>
                             }
