@@ -70,7 +70,7 @@
                                         @foreach (var item in Model)
                                         {
                                             i++;
-                                            @if (item.GioCheckin>DateTime.Now)
+                                            @if (item.TrangThai=="Chờ nhận phòng")
                                             {
                                                 <tr style="outline: 2px solid black; font-weight: bold;">
 
