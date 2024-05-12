@@ -51,23 +51,7 @@
                                         <span name="TenPhong " class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên phòng</span>
                                         <input name="TenPhong" type="text" class="form-control" placeholder="Nhập tên phòng" aria-describedby="basic-addon1" value="@Model.TenPhong">
                                     </div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên loại phòng</span>
-                                        <select name="IdLoaiPhong" type="text" class="form-control" placeholder="Chọn loại phòng" aria-describedby="basic-addon1">
-                                            @foreach (var item in context.LoaiPhongs)
-                                            {
-                                                @if (Model.IdLoaiPhong == item.IdLoaiPhong)
-                                                {
-                                                    <option value="@item.IdLoaiPhong" selected>@item.TenLoaiPhong</option>
-                                                }
-                                                else
-                                                {
-                                                    <option value="@item.IdLoaiPhong">@item.TenLoaiPhong</option>
-                                                }
-
-                                            }
-                                        </select>
-                                    </div>
+                                   
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giá phòng</span>
                                         <input name="GiaPhong" type="text" class="form-control" placeholder="Nhập giá phòng" aria-describedby="basic-addon1" value="@Model.GiaPhong.ToString("N0")">

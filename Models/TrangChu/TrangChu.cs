@@ -28,5 +28,6 @@
 
         public decimal GiaPhongMin { get; set; }
         public decimal GiaPhongMax { get; set; }
+        public string NgayKhongKhaDung { get; set; }
     }
 }

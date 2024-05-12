@@ -34,11 +34,10 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             var listViewPhong = new List<ViewPhong>();
             foreach (var item in phong)
             {
-                var loaiphong = _context.LoaiPhongs.FirstOrDefault(c => c.IdLoaiPhong == item.IdLoaiPhong);
+
                 ViewPhong viewPhong = new ViewPhong();
                 viewPhong.Id = item.Id;
                 viewPhong.TenPhong = item.TenPhong;
-                viewPhong.TenLoaiPhong = loaiphong.TenLoaiPhong;
                 //viewPhong.ChiTietPhong = item.ChiTietPhong;
                 viewPhong.SoLuong = item.SoLuong;
                 viewPhong.GiaPhong = item.GiaPhong;
@@ -73,11 +72,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             var listViewPhong = new List<ViewPhong>();
             foreach (var item in phong)
             {
-                var loaiphong = _context.LoaiPhongs.FirstOrDefault(c => c.IdLoaiPhong == item.IdLoaiPhong);
+                
                 ViewPhong viewPhong = new ViewPhong();
                 viewPhong.Id = item.Id;
                 viewPhong.TenPhong = item.TenPhong;
-                viewPhong.TenLoaiPhong = loaiphong.TenLoaiPhong;
+               // viewPhong.TenLoaiPhong = loaiphong.TenLoaiPhong;
                 //viewPhong.ChiTietPhong = item.ChiTietPhong;
                 viewPhong.SoLuong = item.SoLuong;
                 viewPhong.GiaPhong = item.GiaPhong;
@@ -157,7 +156,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                     SoLuong = input.SoLuong,
                     GiaPhong = input.GiaPhong,
                     GiaSauGiam = input.GiaPhong,         
-                    IdLoaiPhong = input.IdLoaiPhong,
+                    
                     
 
                 };
@@ -202,7 +201,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             CapNhatPhong item = new CapNhatPhong();
             item.id = id;
             item.TenPhong = phong.TenPhong;
-            item.IdLoaiPhong=phong.IdLoaiPhong;
+            //item.IdLoaiPhong=phong.IdLoaiPhong;
             item.GiaPhong = phong.GiaPhong;
             item.SoLuong = phong.SoLuong;
             item.SoNguoiLon = ctp.SoNguoiLon;
@@ -227,7 +226,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 item.TenPhong = input.TenPhong;
                 item.SoLuong = input.SoLuong;
                 item.GiaPhong = input.GiaPhong;
-            item.IdLoaiPhong = input.IdLoaiPhong;
+            //item.IdLoaiPhong = input.IdLoaiPhong;
                 var ctp = _context.ChiTietPhongs.FirstOrDefault(c => c.IdPhong == input.id);
                 ctp.SoNguoiLon = input.SoNguoiLon;
                 ctp.SoTreEm = input.SoTreEm;

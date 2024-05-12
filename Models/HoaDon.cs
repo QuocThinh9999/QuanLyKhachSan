@@ -29,10 +29,10 @@ public partial class HoaDon
     public DateTime GioCheckout { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
-    public decimal PhuThu { get; set; }
+    public decimal? PhuThu { get; set; }
 
     [Column("VAT", TypeName = "decimal(18, 2)")]
-    public decimal Vat { get; set; }
+    public decimal? Vat { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal TongTien { get; set; }
@@ -42,4 +42,10 @@ public partial class HoaDon
 
     [StringLength(450)]
     public string? YeuCau { get; set; }
+
+    [StringLength(450)]
+    public string? TenPhong { get; set; }
+
+    [StringLength(450)]
+    public string? UrlImages { get; set; }
 }

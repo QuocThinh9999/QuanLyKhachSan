@@ -9,7 +9,7 @@ namespace QuanLyKhachSan.Areas.Admin.Models.ThemDuLieu
         public string? IdLoaiPhong { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập số lượng phòng!")]
-        public int? SoLuong { get; set; }
+        public int SoLuong { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập giá phòng!")]
         public decimal GiaPhong { get; set; }

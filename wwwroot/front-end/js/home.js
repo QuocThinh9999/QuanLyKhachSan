@@ -29,6 +29,7 @@ checkDatebtn.addEventListener('click', function () {
 function compareDate() {
     var dateInput1 = new Date(document.getElementById('hasDatepicker1').value);
     var dateInput2 = new Date(document.getElementById('hasDatepicker2').value);
+    
     if (dateInput1 > dateInput2) {
         notiValidate.style.display = 'block';
     } else {

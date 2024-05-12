@@ -266,11 +266,8 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             xacthuc.MaXacThuc = otp.ToString();
             _context.Update(xacthuc);
             _context.SaveChanges();
-
-            // Đường dẫn tới file hình ảnh footer trong máy của bạn
             string imagePath = "D:\\Web\\QuanLyKhachSan\\wwwroot\\images\\MerPerle.png";
 
-            // Tạo mẫu email HTML với hình ảnh nhúng
             string emailTemplate = @"
 <html>
 <body style='width:100%'>

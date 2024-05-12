@@ -1,8 +1,9 @@
-﻿@inject QuanLyKhachSan.Models.DbQuanLyKhachSanContext context
-@if (context.ThongBaos.FirstOrDefault(c => c.TenThongBao == "hoadon").Tttb != 0)
+﻿@model QuanLyKhachSan.Models.ThongBao
+
+@if (Model.Tttb != 0)
 {
     <div class="circle"
          style="width: 25px;height: 20px;border-radius: 50%;background: red;position: absolute;top: 5px;right: 5px;box-shadow:0 0 10px #dfa974;display: flex;align-items: center;justify-content: center;">
-        <span style="font-size: 13px; color: #ffff;">@context.ThongBaos.FirstOrDefault(c=>c.TenThongBao=="hoadon").Tttb</span>
+        <span style="font-size: 13px; color: #ffff;">@Model.Tttb</span>
     </div>
 }

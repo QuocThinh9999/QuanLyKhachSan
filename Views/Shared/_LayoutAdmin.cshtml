@@ -41,9 +41,12 @@
             <div class="sidebar-logo" style="margin-bottom: 54px;">
                 <img src="../../img/logo.png" alt="">
             </div>
+           @*  <div class="log-out-btn">
+                <a href="">Đăng xuất</a>
+            </div> *@
             <div class="sidebar-menu">
                 <ul>
-                    
+                   
                     <li>
                         <div style="line-height: 80px;">
                             <i class="fa fa-info-circle"></i><a href="@Url.Action("DanhSachThongTinWeb", "QuanLyThongTinWeb", new { Areas="Admin"})">
@@ -115,6 +118,14 @@
                             <i class="fa fa-paint-brush"></i><a href="@Url.Action("DanhSachBaiViet", "QuanLyBaiViet", new { Areas="Admin"})">
                                 Quản lý
                                 bài viết
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div style="line-height: 80px;">
+                            <i class="fa fa-power-off"></i><a href="@Url.Action("DangXuat", "TaiKhoan", new { Areas="Admin"})">
+                                Đăng xuất
                             </a>
                         </div>
                     </li>
@@ -199,7 +210,10 @@
                 reloadPartialViewHoaDon();
             }, 500);
         });
+
     </script>
+  
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

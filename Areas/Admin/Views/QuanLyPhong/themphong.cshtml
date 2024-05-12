@@ -49,15 +49,7 @@
                                         <span name="TenPhong " class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên phòng</span>
                                         <input name="TenPhong" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1">
                                     </div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Tên loại phòng</span>
-                                        <select name="IdLoaiPhong" type="text" class="form-control" placeholder="Tên loại phòng" aria-describedby="basic-addon1">
-                                            @foreach (var item in context.LoaiPhongs)
-                                            {
-                                                <option value="@item.IdLoaiPhong">@item.TenLoaiPhong</option>
-                                            }
-                                        </select>
-                                    </div>
+                                   
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1" style="display: inline-block; width: 150px;">Giá phòng</span>
                                         <input name="GiaPhong" type="text" class="form-control" placeholder="Nhập giá phòng" aria-describedby="basic-addon1">

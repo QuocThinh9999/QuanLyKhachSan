@@ -270,3 +270,30 @@ p{
     }
 
 }
+.log-out-btn {
+    margin-left: 50px;
+    font-size: 16px;
+    height: 50px;
+    width: 150px;
+    text-align: center;
+    color: #ffffff;
+    background: #252733;
+    transition: all 0.3s;
+    display: none;
+}
+
+    .log-out-btn a {
+        text-decoration: none;
+        line-height: 50px;
+        color: #ffffff;
+    }
+
+    .log-out-btn:hover {
+        background-color: #dfa974;
+    }
+
+@media only screen and (max-width: 768px) {
+    .log-out-btn {
+        display: block;
+    }
+}

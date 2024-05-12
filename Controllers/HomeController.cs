@@ -55,6 +55,7 @@ namespace QuanLyKhachSan.Controllers
                 bgtrangchu.IdBlog = b.IdBlog;
                 trangChu.blog.Add(bgtrangchu);
             }
+            trangChu.NgayKhongKhaDung = "25/12/2023";
             return View(trangChu);
         }
         

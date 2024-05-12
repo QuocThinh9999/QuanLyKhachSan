@@ -4,7 +4,31 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<head>
+    <script>
+        $(function () {
+            $("#hasDatepicker1").datepicker({
+                beforeShowDay: function (date) {
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
+                    var currentDate = day + '/' + month + '/' + year;
+                    if (currentDate === '@Model.NgayKhongKhaDung') {
+                        return [false, 'disabled-day', 'Ngày không khả dụng'];
+                    }
+                    return [true];
+                }
+            });
+        });
+    </script>
+    <style>
+        .disabled-day {
+            background-color: red !important;
+            color: #FFFFFF !important;
+            cursor: default !important;
+        }
+    </style>
+</head>
 <header class="header__section">
     <div class="top__nav">
         <div class="container">
@@ -52,7 +76,7 @@
                         <div class="menu_left">
                             <ul>
                                 <li class="active"><a href="@Url.Action("Home", "Home", new { Areas="" })">Trang chủ</a></li>
-                                <li><a href=" @Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
+                                <li><a href="@Url.Action("DanhSachPhong", "Phong", new { Areas="" })">Phòng</a></li>
                                 <li><a href="@Url.Action("DanhSachVeChungToi", "VeChungToi", new { Areas=""})">Về chúng tôi</a></li>
                                 <li><a href="@Url.Action("DanhSachBaiViet", "BaiViet", new { Areas=""})">Bài viết</a></li>
                                 <li><a href="@Url.Action("LienLac", "LienLac", new { Areas=""})">Liên hệ</a></li>
@@ -66,6 +90,7 @@
             </div>
         </div>
     </div>
+   
 </header>
 <div class="introduction">
     <div class="container">
@@ -88,14 +113,14 @@
                         <div class="check-date">
                             <p>Ngày vào:</p>
                             <div class="check" style="display: flex;">
-                                <input type="datetime" class="date-input " id="hasDatepicker1" name="GioCheckin">
+                                <input type="datetime" class="date-input " id="hasDatepicker1" name="GioCheckin" readonly>
                                 <div class="icon"><i class="fa fa-calendar-week"></i></div>
                             </div>
                         </div>
                         <div class="check-date">
                             <p>Ngày ra:</p>
                             <div class="check" style="display: flex;">
-                                <input type="datetime" class="date-input " id="hasDatepicker2" name="GioCheckout">
+                                <input type="datetime" class="date-input " id="hasDatepicker2" name="GioCheckout" readonly>
                                 <div class="icon"><i class="fa fa-calendar-week"></i></div>
                             </div>
                             @if (TempData["error"] != null)
@@ -110,18 +135,18 @@
                                 <input id="adult-count" value="0" readonly style="border: none;
                                     text-align: center;
                                     height: 40px;
-                                    width: 60%;" name="SoNguoiLon"></input>
+                                    width: 60%;" name="SoNguoiLon">
                                 <button id="adult-pl" style="border: 0;"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
-                        <div class="select-option">
+                        <div class="select-option"> 
                             <p>Trẻ em: </p>
                             <div class="select-item">
                                 <button id="kid-mn" style="border: 0;"><i class="fa fa-minus"></i></button>
                                 <input id="kid-count" value="0" readonly style="border: none;
                                     text-align: center;
                                     height: 40px;
-                                    width: 60%;" name="SoTreEm"></input>
+                                    width: 60%;" name="SoTreEm">
                                 <button id="kid-pl" style="border: 0;"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -313,5 +338,3 @@
     </div>
 </div>
 
-        
-        

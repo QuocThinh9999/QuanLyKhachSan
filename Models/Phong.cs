@@ -14,13 +14,10 @@ public partial class Phong
 
     public string? UrlImage { get; set; }
 
-    [StringLength(450)]
-    public string? IdLoaiPhong { get; set; }
-
     [StringLength(100)]
     public string? TenPhong { get; set; }
 
-    public int? SoLuong { get; set; }
+    public int SoLuong { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal GiaPhong { get; set; }

@@ -52,7 +52,7 @@ namespace QuanLyKhachSan.Controllers
             var phong=new ChiTietTrangPhong();
             phong.id = phongc.Id;
             phong.TenPhong = phongc.TenPhong;
-            phong.IdLoaiPhong=phongc.IdLoaiPhong;
+          
             phong.GiaPhong=phongc.GiaPhong;
             phong.GiaSauGiam=phongc.GiaSauGiam;
             phong.SoNguoiLon = ctp.SoNguoiLon;

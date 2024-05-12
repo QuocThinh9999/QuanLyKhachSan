@@ -33,6 +33,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             foreach (var item in items)
             {
                 var ten = _context.NguoiDungs.FirstOrDefault(c => c.IdNguoiDung == item.IdNguoiDung);
+                var phong=_context.Phongs.FirstOrDefault(c=>c.Id==item.IdPhong);
                 var hoadon = new HoaDonAdmin();
                 hoadon.IdHoaDon = item.IdHoaDon;
                 hoadon.TenNguoiDung = ten.Ten;
@@ -40,6 +41,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
                 hoadon.GioCheckout = item.GioCheckout;
                 hoadon.TrangThai = item.TrangThai;
                 hoadon.TongTien=item.TongTien;
+                hoadon.TenPhong = phong.TenPhong;
                 hoadon.thongbao = tb.Tttb;
                 hoadons.Add(hoadon);
 
@@ -81,9 +83,11 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             foreach (var item in hoaDons)
             {
                 var tennd = _context.NguoiDungs.FirstOrDefault(c => c.IdNguoiDung == item.IdNguoiDung);
+                var phong = _context.Phongs.FirstOrDefault(c => c.Id == item.IdPhong);
                 var hoadon = new HoaDonAdmin();
                 hoadon.IdHoaDon = item.IdHoaDon;
                 hoadon.TenNguoiDung = tennd.Ten;
+                hoadon.TenPhong = phong.TenPhong;
                 hoadon.GioCheckin = item.GioCheckin.Date;
                 hoadon.GioCheckout = item.GioCheckout.Date;
                 hoadon.TrangThai = item.TrangThai;
@@ -106,6 +110,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             }
             var hoadon=_context.HoaDons.FirstOrDefault(c=>c.IdHoaDon == id);
             var nguoidung = _context.NguoiDungs.FirstOrDefault(c => c.IdNguoiDung == hoadon.IdNguoiDung);
+            var phong = _context.Phongs.FirstOrDefault(c => c.Id == hoadon.IdPhong);
             var ct = new HoaDonAdmin();
             ct.yeucau = hoadon.YeuCau;
             ct.IdHoaDon = hoadon.IdHoaDon;
@@ -115,6 +120,7 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             ct.TongTien= hoadon.TongTien;
             ct.TrangThai = hoadon.TrangThai;
             ct.email = nguoidung.Email;
+            ct.TenPhong = phong.TenPhong;
             return View(ct);
         }
         [Route("cap-nhat-hoa-don")]
@@ -130,6 +136,12 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
             var hoadon=_context.HoaDons.FirstOrDefault(c=>c.IdHoaDon == IdHoaDon);
             hoadon.TrangThai = trangthai;
             
+            //if(hoadon.TrangThai == null)
+            //{
+            //    var tb = new ThongBao(404,"asdfghj");
+            //    return PartialView("_ThongBaoHoaDonPartial", tb);
+            //}
+
             _context.HoaDons.Update(hoadon);
             _context.SaveChanges();
             return RedirectToAction("DanhSachHoaDon", "QuanLyHoaDon", new { Areas = "Admin" });
@@ -137,7 +149,8 @@ namespace QuanLyKhachSan.Areas.Admin.Controllers
         [Route("thong-bao-hoa-don")]
         public IActionResult ThongBaoHoaDon()
         {
-            return PartialView("_ThongBaoHoaDonPartial");
+            var tb= _context.ThongBaos.FirstOrDefault(c=>c.TenThongBao=="hoadon");
+            return PartialView("_ThongBaoHoaDonPartial", tb);
         }
         
     }

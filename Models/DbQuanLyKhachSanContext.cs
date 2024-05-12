@@ -25,8 +25,6 @@ public partial class DbQuanLyKhachSanContext : DbContext
 
     public virtual DbSet<HoaDon> HoaDons { get; set; }
 
-    public virtual DbSet<LoaiPhong> LoaiPhongs { get; set; }
-
     public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
 
     public virtual DbSet<Phong> Phongs { get; set; }
